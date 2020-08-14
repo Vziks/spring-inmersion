@@ -43,4 +43,13 @@ public class Issue {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id='" + id + '\'' +
+                ", issue='" + issue + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
