@@ -49,7 +49,7 @@ public class IssieController {
 
 
     @RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public void updateIssue(@PathVariable String id, @RequestBody Issue issue) {
         System.out.println(id);
         System.out.println(issue);
