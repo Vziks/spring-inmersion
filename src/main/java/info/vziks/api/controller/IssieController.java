@@ -46,4 +46,13 @@ public class IssieController {
     public void addIssue(@RequestBody Issue issue) {
         this.issueService.addIssue(issue);
     }
+
+
+    @RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateIssue(@PathVariable String id, @RequestBody Issue issue) {
+        System.out.println(id);
+        System.out.println(issue);
+        this.issueService.updateIssue(id, issue);
+    }
 }

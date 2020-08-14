@@ -26,7 +26,7 @@ public class IssueService {
             ));
 
     public List<Issue> getAllIssues() {
-        return this.issueList;
+        return issueList;
     }
 
     public Issue getIssueById(String id) {
@@ -35,7 +35,15 @@ public class IssueService {
     }
 
     public void addIssue(Issue issue) {
-        this.issueList.add(issue);
+        issueList.add(issue);
     }
 
+    public void updateIssue(String id, Issue issue) {
+        for (int i = 0; i < issueList.size(); i++) {
+            if (id.equals(issueList.get(i).getId())) {
+                issueList.set(i, issue);
+                return;
+            }
+        }
+    }
 }
