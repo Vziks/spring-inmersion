@@ -1,0 +1,23 @@
+# USING YAML BUT
+# https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config-yaml-shortcomings
+# For Spring project, .properties file : @PropertySource annotation support this file type. .yml file :
+# @PropertySource annotation can't support this file type.
+server.port: 8000
+
+spring.datasource.platform: postgres
+spring.datasource:
+    url: jdbc:postgresql://localhost:5432/skeleton
+    username: vziks
+    password:
+    initialization-mode: always
+
+
+spring.jpa:
+    show-sql: true
+    hibernate:
+        ddl-auto: create
+    properties.hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc.lob.non_contextual_creation: true
+
+

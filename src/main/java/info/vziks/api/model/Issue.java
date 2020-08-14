@@ -1,12 +1,18 @@
 package info.vziks.api.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Class Issue
  * Project spring-api
  *
  * @author Anton Prokhorov <vziks@live.ru>
  */
+@Entity
 public class Issue {
+
+    @Id
     private String id;
     private String issue;
     private String description;

@@ -24,7 +24,7 @@ public class IssieController {
 
     @RequestMapping("/issues")
     public List<Issue> allIssues() {
-        return this.issueService.getAllIssues();
+        return issueService.getAllIssues();
     }
 
     @RequestMapping("/issues/{id}")
@@ -47,12 +47,11 @@ public class IssieController {
         this.issueService.addIssue(issue);
     }
 
-    @RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/issues/", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void updateIssue(@PathVariable String id, @RequestBody Issue issue) {
-        this.issueService.updateIssue(id, issue);
+    public void updateIssue(@RequestBody Issue issue) {
+        this.issueService.updateIssue(issue);
     }
-
 
     @RequestMapping(value = "/issues/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
