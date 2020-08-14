@@ -3,11 +3,13 @@ package info.vziks.api.controller;
 import info.vziks.api.model.Issue;
 import info.vziks.api.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class IssieController
@@ -25,4 +27,18 @@ public class IssieController {
     public List<Issue> allIssues() {
         return this.issueService.getAllIssues();
     }
+
+    @RequestMapping("/issues/{id}")
+    public Issue getIssue(@PathVariable String id) {
+        Issue issue = this.issueService.getIssueById(id);
+        if (Objects.isNull(issue)) {
+            throw new ResourceNotFoundException();
+        }
+        return issue;
+    }
+
+//    @RequestMapping("/issues/{foo}")
+//    public Issue getIssueByOtherName(@PathVariable("foo") String id) {
+//        return this.issueService.getIssueById(id);
+//    }
 }

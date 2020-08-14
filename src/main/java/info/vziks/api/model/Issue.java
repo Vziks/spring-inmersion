@@ -7,11 +7,11 @@ package info.vziks.api.model;
  * @author Anton Prokhorov <vziks@live.ru>
  */
 public class Issue {
-    private int id;
+    private String id;
     private String issue;
     private String description;
 
-    public Issue(int id, String issue, String description) {
+    public Issue(String id, String issue, String description) {
         this.id = id;
         this.issue = issue;
         this.description = description;
@@ -20,7 +20,7 @@ public class Issue {
     public Issue() {
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -32,7 +32,7 @@ public class Issue {
         this.description = description;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
