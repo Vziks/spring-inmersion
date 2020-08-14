@@ -46,4 +46,14 @@ public class IssueService {
             }
         }
     }
+
+    public void deleteIssue(String id) {
+
+        for (int i = 0; i < issueList.size(); i++) {
+            if (id.equals(issueList.get(i).getId())) {
+                issueList.remove(i);
+                return;
+            }
+        }
+    }
 }

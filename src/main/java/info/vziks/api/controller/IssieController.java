@@ -47,12 +47,16 @@ public class IssieController {
         this.issueService.addIssue(issue);
     }
 
-
     @RequestMapping(value = "/issues/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void updateIssue(@PathVariable String id, @RequestBody Issue issue) {
-        System.out.println(id);
-        System.out.println(issue);
         this.issueService.updateIssue(id, issue);
+    }
+
+
+    @RequestMapping(value = "/issues/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteIssue(@PathVariable String id) {
+        this.issueService.deleteIssue(id);
     }
 }
