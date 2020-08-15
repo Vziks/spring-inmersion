@@ -52,4 +52,11 @@ public class IssueService {
         Issue issue = getIssueById(id);
         issueRepository.delete(issue);
     }
+
+    public List<Issue> getByAssigneeId(Long id) {
+//        List<Issue> issues = new ArrayList<>();
+        return issueRepository.findByAssigneeId(id);
+//        return issues;
+
+    }
 }
