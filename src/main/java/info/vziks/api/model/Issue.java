@@ -1,7 +1,8 @@
 package info.vziks.api.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 
 /**
  * Class Issue
@@ -13,22 +14,26 @@ import javax.persistence.Id;
 public class Issue {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private long id;
     private String issue;
     private String description;
 
-    public Issue(String id, String issue, String description) {
+    public Issue() {
+    }
+
+    public Issue(long id, String issue, String description) {
         this.id = id;
         this.issue = issue;
         this.description = description;
     }
 
-    public Issue() {
-    }
+    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "assignee_id", nullable = false)
+    private Assignee assignee;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+
 
     public void setIssue(String issue) {
         this.issue = issue;
@@ -38,7 +43,7 @@ public class Issue {
         this.description = description;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
@@ -48,6 +53,14 @@ public class Issue {
 
     public String getDescription() {
         return description;
+    }
+
+    public Assignee getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(Assignee assignee) {
+        this.assignee = assignee;
     }
 
     @Override
