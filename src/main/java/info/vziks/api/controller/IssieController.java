@@ -28,8 +28,8 @@ public class IssieController {
     }
 
     @RequestMapping("/issues/{id}")
-    public Issue getIssue(@PathVariable String id) {
-        Issue issue = this.issueService.getIssueById(id);
+    public Issue getIssue(@PathVariable Long id) {
+        Issue issue = issueService.getIssueById(id);
         if (Objects.isNull(issue)) {
             throw new ResourceNotFoundException();
         }
@@ -44,18 +44,18 @@ public class IssieController {
     @RequestMapping(value = "/issues", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void addIssue(@RequestBody Issue issue) {
-        this.issueService.addIssue(issue);
+        issueService.addIssue(issue);
     }
 
-    @RequestMapping(value = "/issues/", method = RequestMethod.PUT)
+    @RequestMapping(value = "/issues", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void updateIssue(@RequestBody Issue issue) {
-        this.issueService.updateIssue(issue);
+        issueService.updateIssue(issue);
     }
 
     @RequestMapping(value = "/issues/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteIssue(@PathVariable String id) {
-        this.issueService.deleteIssue(id);
+    public void deleteIssue(@PathVariable Long id) {
+        issueService.deleteIssue(id);
     }
 }

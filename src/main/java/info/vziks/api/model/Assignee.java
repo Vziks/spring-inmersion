@@ -1,6 +1,9 @@
 package info.vziks.api.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,7 +18,7 @@ import java.util.List;
 public class Assignee {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -23,6 +26,7 @@ public class Assignee {
     @OneToMany(mappedBy = "assignee", fetch = FetchType.EAGER)
 //    @JsonSerialize(using = CustomListSerializer.class)
     @JsonBackReference
+//    @JsonIgnoreProperties("assignee")
     private List<Issue> issues;
 
     public String getName() {

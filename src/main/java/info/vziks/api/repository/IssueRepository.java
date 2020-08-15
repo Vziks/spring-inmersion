@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Anton Prokhorov <vziks@live.ru>
  */
-public interface IssueRepository extends CrudRepository<Issue, String> {
+public interface IssueRepository extends CrudRepository<Issue, Long> {
 
 }

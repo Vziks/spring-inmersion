@@ -4,9 +4,11 @@ import info.vziks.api.model.Issue;
 import info.vziks.api.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.SerializationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -27,31 +29,27 @@ public class IssueService {
         return issues;
     }
 
-    public Issue getIssueById(String id) {
+    public Issue getIssueById(Long id) {
         Optional<Issue> optionalIssue = issueRepository.findById(id);
         return optionalIssue.orElse(null);
     }
 
     public void addIssue(Issue issue) {
-        issueRepository.save(issue);
+        Issue issueTmp = null;
+        try {
+            issueTmp = (Issue) issue.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        issueRepository.save(Objects.requireNonNull(issueTmp));
     }
 
     public void updateIssue(Issue issue) {
         issueRepository.save(issue);
-//        for (int i = 0; i < issueList.size(); i++) {
-//            if (id.equals(issueList.get(i).getId())) {
-//                issueList.set(i, issue);
-//                return;
-//            }
-//        }
     }
 
-    public void deleteIssue(String id) {
-//        issueList.removeIf(issue -> id.equals(issue.getId()));
-        Issue issue = this.getIssueById(id);
+    public void deleteIssue(Long id) {
+        Issue issue = getIssueById(id);
         issueRepository.delete(issue);
-        // or
-//        issueRepository.deleteById(id);
-
     }
 }

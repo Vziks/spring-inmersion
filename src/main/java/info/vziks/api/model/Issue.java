@@ -1,6 +1,8 @@
 package info.vziks.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 
@@ -11,10 +13,11 @@ import javax.persistence.*;
  * @author Anton Prokhorov <vziks@live.ru>
  */
 @Entity
-public class Issue {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class Issue implements Cloneable {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String issue;
     private String description;
@@ -28,12 +31,10 @@ public class Issue {
         this.description = description;
     }
 
-    @JsonManagedReference
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    //    @JsonManagedReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id", nullable = false)
     private Assignee assignee;
-
-
 
     public void setIssue(String issue) {
         this.issue = issue;
@@ -66,9 +67,21 @@ public class Issue {
     @Override
     public String toString() {
         return "Issue{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", issue='" + issue + '\'' +
                 ", description='" + description + '\'' +
+                ", assignee=" + assignee +
                 '}';
+    }
+
+    private void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Issue newIssue = (Issue) super.clone();
+        newIssue.setId(0);
+        return newIssue;
     }
 }
