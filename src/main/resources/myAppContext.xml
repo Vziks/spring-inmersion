@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:property-placeholder location="classpath:propertyContext.properties"/>
+
+    <bean id="musicPlayer"
+          class="info.vziks.api.beans.MusicPlayer">
+        <constructor-arg ref="classicMusic"/>
+    </bean>
+    <bean id="musicPlayerSet"
+          class="info.vziks.api.beans.MusicPlayer">
+        <property name="Music" ref="rockMusic"/>
+    </bean>
+    <bean id="myBean"
+          class="info.vziks.api.beans.MyBean">
+        <constructor-arg value="Params"/>
+    </bean>
+    <bean id="rockMusic"
+          class="info.vziks.api.beans.RockMusic">
+    </bean>
+    <bean id="classicMusic"
+          class="info.vziks.api.beans.ClassicMusic">
+    </bean>
+    <bean id="popMusic"
+          class="info.vziks.api.beans.PopMusic">
+    </bean>
+    <bean id="musicPlayerList"
+          class="info.vziks.api.beans.MusicPlayer">
+        <property name="musicList">
+            <list>
+                <ref bean="rockMusic"/>
+                <ref bean="classicMusic"/>
+                <ref bean="popMusic"/>
+            </list>
+        </property>
+        <property name="volume" value="${fileProperty.number}"/>
+    </bean>
+</beans>

@@ -4,7 +4,6 @@ import info.vziks.api.model.Issue;
 import info.vziks.api.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.SerializationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
