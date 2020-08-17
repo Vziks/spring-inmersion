@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class AppContextController
@@ -35,10 +37,9 @@ public class AppContextController {
             musics.add(contextTry.getBean("classicMusic", ClassicMusic.class));
 
 
-
             String[] allBeanNames = contextTry.getBeanDefinitionNames();
 
-            for (String bean:
+            for (String bean :
                     allBeanNames) {
                 System.out.println(bean);
             }
@@ -53,9 +54,38 @@ public class AppContextController {
             }
 
 
+            MyBean myBean = contextTry.getBean("myBean", MyBean.class);
+            MyBean myBean1 = contextTry.getBean("myBean", MyBean.class);
+
+
+            System.out.println(myBean);
+            System.out.println(myBean);
+
+
         }
 
 
         return musics;
     }
+
+
+    @RequestMapping("/appcontext/score")
+    public Map<Integer, MyBean> getBeansScope() {
+
+        Map<Integer, MyBean> myBeans = new HashMap<>();
+
+        try (ClassPathXmlApplicationContext contextTry =
+                     new ClassPathXmlApplicationContext("myAppContext.xml")
+
+        ) {
+            MyBean myBean = contextTry.getBean("myBean", MyBean.class);
+            MyBean myBean1 = contextTry.getBean("myBean", MyBean.class);
+
+            myBeans.put(myBean.hashCode(), myBean);
+            myBeans.put(myBean1.hashCode(), myBean1);
+        }
+
+        return myBeans;
+    }
+
 }
