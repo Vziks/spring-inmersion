@@ -70,16 +70,18 @@ public class AppContextController {
 
 
     @RequestMapping("/appcontext/score")
-    public Map<Integer, MyBean> getBeansScope() {
+    public Map<Integer, IMyBean> getBeansScope() {
 
-        Map<Integer, MyBean> myBeans = new HashMap<>();
+        Map<Integer, IMyBean> myBeans = new HashMap<>();
 
         try (ClassPathXmlApplicationContext contextTry =
                      new ClassPathXmlApplicationContext("myAppContext.xml")
 
         ) {
-            MyBean myBean1 = contextTry.getBean("myBean", MyBean.class);
-            MyBean myBean2 = contextTry.getBean("myBean", MyBean.class);
+            IMyBean myBean1 = contextTry.getBean("myBean", MyBean.class);
+            IMyBean myBean2 = contextTry.getBean("myBean", MyBean.class);
+            IMyBean myBean3 = contextTry.getBean("myBean1", MyBean1.class);
+            IMyBean myBean4 = contextTry.getBean("myBean1", MyBean1.class);
 
 
             System.out.println(myBean1 == myBean2);
@@ -87,8 +89,12 @@ public class AppContextController {
             // if scope default create singleton object (myBean1 == myBean2 : true),
             // else scope prototype allows to have any number of bean instances (myBean1 == myBean2 : false)
 
-            myBeans.put(myBean1.hashCode(), myBean1);
-            myBeans.put(myBean2.hashCode(), myBean2);
+            myBeans.put(myBean1.hashCode(), myBean1);  //scope prototype
+            myBeans.put(myBean2.hashCode(), myBean2);  //scope prototype
+
+            myBeans.put(myBean3.hashCode(), myBean3);  //scope default(singleton)
+            myBeans.put(myBean4.hashCode(), myBean4);  //scope default(singleton)
+
         }
 
         return myBeans;

@@ -25,6 +25,11 @@
 
         <constructor-arg value="Params"/>
     </bean>
+    <bean id="myBean1"
+          class="info.vziks.api.beans.MyBean1">
+
+        <constructor-arg value="Params1"/>
+    </bean>
     <bean id="rockMusic"
           class="info.vziks.api.beans.RockMusic">
     </bean>
