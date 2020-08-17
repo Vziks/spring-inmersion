@@ -21,13 +21,15 @@
         <property name="Music" ref="rockMusic"/>
     </bean>
     <bean id="myBean"
-          class="info.vziks.api.beans.MyBean" scope="prototype">
-
+          class="info.vziks.api.beans.MyBean" scope="prototype"
+          init-method="doInit"
+          destroy-method="doDestroy">
         <constructor-arg value="Params"/>
     </bean>
     <bean id="myBean1"
-          class="info.vziks.api.beans.MyBean1">
-
+          class="info.vziks.api.beans.MyBean1"
+          init-method="doInit"
+          destroy-method="doDestroy">
         <constructor-arg value="Params1"/>
     </bean>
     <bean id="rockMusic"

@@ -23,5 +23,14 @@ public class MyBean1 implements IMyBean{
     public void setName(String name) {
         this.name = name;
     }
+
+
+    private void doDestroy(){
+        System.out.println("Destroy" + this.getClass());
+    }
+
+    private void doInit(){
+        System.out.println("Init" + this.getClass());
+    }
 }
 

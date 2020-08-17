@@ -78,7 +78,7 @@ public class AppContextController {
                      new ClassPathXmlApplicationContext("myAppContext.xml")
 
         ) {
-            IMyBean myBean1 = contextTry.getBean("myBean", MyBean.class);
+            IMyBean myBean1 = (IMyBean) contextTry.getBean("myBean");
             IMyBean myBean2 = contextTry.getBean("myBean", MyBean.class);
             IMyBean myBean3 = contextTry.getBean("myBean1", MyBean1.class);
             IMyBean myBean4 = contextTry.getBean("myBean1", MyBean1.class);
@@ -86,8 +86,9 @@ public class AppContextController {
 
             System.out.println(myBean1 == myBean2);
 
-            // if scope default create singleton object (myBean1 == myBean2 : true),
-            // else scope prototype allows to have any number of bean instances (myBean1 == myBean2 : false)
+            // if scope default create singleton object (myBean4 == myBean3 : true),
+            // else scope prototype allows to have any number of bean instances
+            // (myBean1 == myBean2 : false)
 
             myBeans.put(myBean1.hashCode(), myBean1);  //scope prototype
             myBeans.put(myBean2.hashCode(), myBean2);  //scope prototype
