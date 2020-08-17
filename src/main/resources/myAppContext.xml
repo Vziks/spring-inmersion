@@ -22,6 +22,7 @@
     </bean>
     <bean id="myBean"
           class="info.vziks.api.beans.MyBean" scope="prototype">
+
         <constructor-arg value="Params"/>
     </bean>
     <bean id="rockMusic"
