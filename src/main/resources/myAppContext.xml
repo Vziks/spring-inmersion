@@ -32,6 +32,10 @@
           destroy-method="doDestroy">
         <constructor-arg value="Params1"/>
     </bean>
+    <bean id="myBean2"
+          class="info.vziks.api.beans.MyBean2"
+          factory-method="getInstance">
+    </bean>
     <bean id="rockMusic"
           class="info.vziks.api.beans.RockMusic">
     </bean>
