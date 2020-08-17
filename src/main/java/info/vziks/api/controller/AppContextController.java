@@ -82,7 +82,10 @@ public class AppContextController {
             IMyBean myBean2 = contextTry.getBean("myBean", MyBean.class);
             IMyBean myBean3 = contextTry.getBean("myBean1", MyBean1.class);
             IMyBean myBean4 = contextTry.getBean("myBean1", MyBean1.class);
+
+
             IMyBean myBean5 = contextTry.getBean("myBean2", MyBean2.class);
+            IMyBean myBean6 = contextTry.getBean("myBean2", MyBean2.class);
 
 
             System.out.println(myBean1 == myBean2);
@@ -98,6 +101,7 @@ public class AppContextController {
             myBeans.put(myBean4.hashCode(), myBean4);  //scope default(singleton)
 
             myBeans.put(myBean5.hashCode(), myBean5);  // factory method
+            myBeans.put(myBean6.hashCode(), myBean6);  // but it is still singleton
 
         }
 
