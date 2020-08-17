@@ -34,6 +34,8 @@ public class AppContextController {
             musics.add(contextTry.getBean("rockMusic", RockMusic.class));
             musics.add(contextTry.getBean("classicMusic", ClassicMusic.class));
 
+
+
             String[] allBeanNames = contextTry.getBeanDefinitionNames();
 
             for (String bean:
@@ -52,6 +54,7 @@ public class AppContextController {
 
 
         }
+
 
         return musics;
     }

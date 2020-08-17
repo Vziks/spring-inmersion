@@ -43,5 +43,6 @@
             </list>
         </property>
         <property name="volume" value="${fileProperty.number}"/>
+        <property name="name" value="${fileProperty.name}"/>
     </bean>
 </beans>

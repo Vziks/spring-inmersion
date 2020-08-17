@@ -19,6 +19,7 @@ public class MusicPlayer {
 
 
     private int volume;
+    private String name;
 
 
     public MusicPlayer(Music music) {
@@ -63,6 +64,15 @@ public class MusicPlayer {
                 "playList=" + playList +
                 ", music=" + music +
                 ", volume=" + volume +
+                ", name='" + name + '\'' +
                 '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
