@@ -1,7 +1,6 @@
 package info.vziks.api.controller;
 
 import info.vziks.api.beans.*;
-import info.vziks.api.model.Issue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
