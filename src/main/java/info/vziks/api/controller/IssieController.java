@@ -53,6 +53,12 @@ public class IssieController {
         issueService.addIssue(issue);
     }
 
+    @RequestMapping(value = "/issues/count", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public long countIssue() {
+        return issueService.countIssues();
+    }
+
     @RequestMapping(value = "/issues", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void updateIssue(@RequestBody Issue issue) {

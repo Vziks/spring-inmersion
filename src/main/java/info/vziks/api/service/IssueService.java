@@ -52,6 +52,10 @@ public class IssueService {
         issueRepository.delete(issue);
     }
 
+    public long countIssues() {
+        return issueRepository.count();
+    }
+
     public List<Issue> getByAssigneeId(Long id) {
 //        List<Issue> issues = new ArrayList<>();
         return issueRepository.findByAssigneeId(id);

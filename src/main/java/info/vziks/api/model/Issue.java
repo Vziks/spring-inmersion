@@ -3,8 +3,12 @@ package info.vziks.api.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Class Issue
@@ -13,6 +17,7 @@ import javax.persistence.*;
  * @author Anton Prokhorov <vziks@live.ru>
  */
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Issue implements Cloneable {
 
@@ -22,6 +27,11 @@ public class Issue implements Cloneable {
     private String issue;
     private String description;
 
+    @CreatedDate
+    Date createdAt;
+
+    @LastModifiedDate
+    Date modifiedAt;
 
     @Transient
     int status;
@@ -89,5 +99,13 @@ public class Issue implements Cloneable {
         Issue newIssue = (Issue) super.clone();
         newIssue.setId(0);
         return newIssue;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -3,6 +3,7 @@ package info.vziks.api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.function.RouterFunction;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.function.ServerResponse;
 @SpringBootApplication
 @EnableScheduling
 @EnableWebSecurity
+@EnableJpaAuditing
 public class ApiApplication {
 
     public static void main(String[] args) {
@@ -29,9 +31,7 @@ public class ApiApplication {
 
     private ServerResponse createRoute(ServerRequest serverRequest) {
 
-        ServerResponse serverResponse = ServerResponse.ok().render("create");
-
-        return serverResponse;
+        return ServerResponse.ok().render("create");
     }
 
 }
