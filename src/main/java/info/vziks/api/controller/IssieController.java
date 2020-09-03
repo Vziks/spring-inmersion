@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 /**
  * Class IssieController
  * Project spring-api
@@ -19,11 +21,14 @@ import java.util.Objects;
 @RestController
 public class IssieController {
 
+    Logger logger = LogManager.getLogger(IssieController.class);
+
     @Autowired
     private IssueService issueService;
 
     @RequestMapping("/issues")
     public List<Issue> allIssues() {
+        logger.info("Request /issues");
         return issueService.getAllIssues();
     }
 
