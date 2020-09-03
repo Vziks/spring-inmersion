@@ -22,6 +22,12 @@ public class Issue implements Cloneable {
     private String issue;
     private String description;
 
+
+    @Transient
+    int status;
+
+    int type;
+
     public Issue() {
     }
 
