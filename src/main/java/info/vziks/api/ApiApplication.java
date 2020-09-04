@@ -1,8 +1,10 @@
 package info.vziks.api;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,17 +13,31 @@ import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
+import java.util.Collections;
+
 @SpringBootApplication
 @EnableScheduling
 @EnableWebSecurity
 @EnableJpaAuditing
+@PropertySource("classpath:propertyContext.properties")
 public class ApiApplication {
 
+    @Value("${serve.port}")
+    private static int port;
+
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+
+        SpringApplication app = new SpringApplication(ApiApplication.class);
+        app.setDefaultProperties(Collections
+                .singletonMap("server.port", port));
+        app.run(args);
     }
-    
-    
+
+//    public static void main(String[] args) {
+//        SpringApplication.run(ApiApplication.class, args);
+//    }
+
+
     @Bean
     RouterFunction<?> routerFunction() {
         return RouterFunctions.route().GET("/route/one", this::createRoute).build()

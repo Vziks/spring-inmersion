@@ -19,8 +19,12 @@ import java.util.Optional;
 @Service
 public class IssueService {
 
+    private final IssueRepository issueRepository;
+
     @Autowired
-    private IssueRepository issueRepository;
+    public IssueService(IssueRepository issueRepository) {
+        this.issueRepository = issueRepository;
+    }
 
     public List<Issue> getAllIssues() {
         List<Issue> issues = new ArrayList<>();

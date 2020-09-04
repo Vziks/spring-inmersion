@@ -1,7 +1,6 @@
 package info.vziks.api.service;
 
 import info.vziks.api.beans.Formatter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class FormatterService {
 
-    @Autowired
-    @Qualifier("AFormatter")
-    private Formatter aformatter;
+    private final Formatter aFormatter;
 
-    @Autowired
-    @Qualifier("BFormatter")
-    private Formatter bformatter;
+    private final Formatter bFormatter;
 
+    private final Formatter cFormatter;
 
-    @Autowired
-    private Formatter cFormatter;
-
-
+    public FormatterService(@Qualifier("AFormatter") Formatter aFormatter, @Qualifier("BFormatter") Formatter bFormatter, Formatter cFormatter) {
+        this.aFormatter = aFormatter;
+        this.bFormatter = bFormatter;
+        this.cFormatter = cFormatter;
+    }
 }
