@@ -17,7 +17,6 @@ public class UserAreaController {
         return "foruser";
     }
 
-
     @GetMapping("/foradmin/")
     public String foradmin() {
         return "foradmin";

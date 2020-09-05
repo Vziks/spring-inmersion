@@ -1,6 +1,5 @@
 package info.vziks.api;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,8 +12,6 @@ import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
-import java.util.Collections;
-
 @SpringBootApplication
 @EnableScheduling
 @EnableWebSecurity
@@ -22,27 +19,17 @@ import java.util.Collections;
 @PropertySource("classpath:propertyContext.properties")
 public class ApiApplication {
 
-    @Value("${serve.port}")
-    private static int port;
 
     public static void main(String[] args) {
-
-        SpringApplication app = new SpringApplication(ApiApplication.class);
-        app.setDefaultProperties(Collections
-                .singletonMap("server.port", port));
-        app.run(args);
+        SpringApplication.run(ApiApplication.class, args);
     }
-
-//    public static void main(String[] args) {
-//        SpringApplication.run(ApiApplication.class, args);
-//    }
-
 
     @Bean
     RouterFunction<?> routerFunction() {
-        return RouterFunctions.route().GET("/route/one", this::createRoute).build()
-                .and(RouterFunctions.route().GET("/route/two", this::createRoute).build())
-                .and(RouterFunctions.route().GET("/route/three", this::createRoute).build());
+        return RouterFunctions.route().GET("/route/one", this::createRoute)
+                .add(RouterFunctions.route().GET("/route/two", this::createRoute).build())
+                .add(RouterFunctions.route().GET("/route/three", this::createRoute).build())
+                .build();
     }
 
     private ServerResponse createRoute(ServerRequest serverRequest) {

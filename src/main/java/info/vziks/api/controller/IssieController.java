@@ -2,6 +2,8 @@ package info.vziks.api.controller;
 
 import info.vziks.api.model.Issue;
 import info.vziks.api.service.IssueService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -9,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 /**
  * Class IssieController
@@ -27,17 +26,16 @@ public class IssieController {
     @Autowired
     private IssueService issueService;
 
-    @RequestMapping("/issues")
+    @RequestMapping(path = "/issues")
     public List<Issue> allIssues() {
         logger.info("Request /issues");
         return issueService.getAllIssues();
     }
 
-    @RequestMapping("/issues/assignee/{id}")
+    @RequestMapping(path = "/issues/assignee/{id}")
     public List<Issue> getByAssigneeId(@PathVariable Long id) {
         return issueService.getByAssigneeId(id);
     }
-
 
     @RequestMapping("/issues/{id}")
     public Issue getIssue(@PathVariable Long id) {

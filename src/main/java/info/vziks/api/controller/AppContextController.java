@@ -1,6 +1,7 @@
 package info.vziks.api.controller;
 
 import info.vziks.api.beans.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,8 +22,12 @@ import java.util.Map;
 @RestController
 public class AppContextController {
 
+    @Autowired
+    private Region region;
+
     @RequestMapping("/appcontext")
     public List<Music> getContext() {
+
 
         List<Music> musics = new ArrayList<>();
 
@@ -34,7 +39,6 @@ public class AppContextController {
         ) {
             musics.add(contextTry.getBean("rockMusic", RockMusic.class));
             musics.add(contextTry.getBean("classicMusic", ClassicMusic.class));
-
 
             String[] allBeanNames = contextTry.getBeanDefinitionNames();
 

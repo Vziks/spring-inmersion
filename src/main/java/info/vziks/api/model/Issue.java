@@ -49,7 +49,7 @@ public class Issue implements Cloneable {
 
     //    @JsonManagedReference
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "assignee_id", nullable = false)
+    @JoinColumn(name = "assignee_id", nullable = true)
     private Assignee assignee;
 
     public void setIssue(String issue) {

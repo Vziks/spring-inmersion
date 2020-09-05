@@ -21,10 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @PropertySource("classpath:propertyContext.properties")
 public class WebContentController {
 
+    public WebContentController() {
+        logger.info("Hello from WebContentController");
+    }
 
     @Value("${spring.datasource.url}")
     private String jdbcUrl;
 
+    @Value("${fileProperty.message}")
+    private String myStr;
 
     @Value("${fileProperty.number}")
     private int fileValue;
@@ -35,10 +40,11 @@ public class WebContentController {
     public String content(@RequestParam(name = "content", required = false, defaultValue = "Content") String content, Model model) {
 
         logger.info("Hello from Logback {}", content);
-
+        logger.info("Hello from this.myStr {}", this.myStr);
         model.addAttribute("content", content);
         model.addAttribute("jdbcUrl", this.jdbcUrl);
         model.addAttribute("fileValue", this.fileValue);
         return "content";
     }
+
 }
