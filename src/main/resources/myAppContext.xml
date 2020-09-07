@@ -79,6 +79,7 @@
     <util:list id="names">
         <value>buttons</value>
         <value>labels</value>
+<!--        <value>messages/label</value>-->
     </util:list>
 
 

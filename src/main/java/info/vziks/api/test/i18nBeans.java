@@ -22,6 +22,7 @@ public class i18nBeans {
         Locale english = Locale.ENGLISH;
         Locale russian = new Locale("ru", "RU");
 
+
         System.out.println(cxt.getMessage("message", null, english));
         System.out.println(cxt.getMessage("message", null, russian));
         System.out.println(cxt.getMessage("messageParams", new Object[] {"code"}, english));

@@ -4,11 +4,14 @@ package info.vziks.api.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Locale;
 
 
 /**
@@ -21,8 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @PropertySource("classpath:propertyContext.properties")
 public class WebContentController {
 
-    public WebContentController() {
+
+    private final MessageSource messageSource;
+
+    public WebContentController(MessageSource messageSource) {
         logger.info("Hello from WebContentController");
+        this.messageSource = messageSource;
     }
 
     @Value("${spring.datasource.url}")
@@ -39,6 +46,19 @@ public class WebContentController {
     @GetMapping("/content")
     public String content(@RequestParam(name = "content", required = false, defaultValue = "Content") String content, Model model) {
 
+
+        Locale russian = new Locale("ru", "RU");
+
+
+        System.out.println(messageSource);
+        System.out.println(messageSource.getMessage("helloMessage",
+                new Object[] {"Paul Smith"}, russian));
+
+        logger.info("{}", messageSource.getMessage("helloMessage",
+                null, Locale.ENGLISH));
+
+        logger.info("Hello from Logback {}", messageSource.getMessage("helloMessage",
+                new Object[] {"Paul Smith"}, russian));
         logger.info("Hello from Logback {}", content);
         logger.info("Hello from this.myStr {}", this.myStr);
         model.addAttribute("content", content);
