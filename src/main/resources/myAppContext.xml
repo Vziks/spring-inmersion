@@ -57,4 +57,19 @@
         <property name="volume" value="${fileProperty.number}"/>
         <property name="name" value="${fileProperty.name}"/>
     </bean>
+
+    <bean id="parent"
+          class="info.vziks.api.beans.Singer"
+          p:name="John" p:age="30" p:active="true">
+    </bean>
+    <bean id="child"
+          class="info.vziks.api.beans.Singer"
+          parent="parent" p:age="0">
+    </bean>
+
+    <bean id="namedSinger"
+          class="info.vziks.api.beans.NamedSinger">
+    </bean>
+
+
 </beans>
