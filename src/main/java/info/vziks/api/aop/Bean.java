@@ -12,4 +12,9 @@ public class Bean {
         System.out.print("Bean");
     }
 
+
+    public void add(){
+        System.out.print("add Bean");
+    }
+
 }
