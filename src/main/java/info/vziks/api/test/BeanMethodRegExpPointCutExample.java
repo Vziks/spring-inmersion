@@ -5,27 +5,27 @@ import info.vziks.api.aop.BeanMethods;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.aop.support.JdkRegexpMethodPointcut;
 
 /**
- * Class BeanMethodNamePointCutExample
+ * Class BeanMethodRegExpPointCutExample
  * Project spring-api
  *
  * @author Anton Prokhorov <vziks@live.ru>
  */
-public class BeanMethodNamePointCutExample {
-
+public class BeanMethodRegExpPointCutExample {
 
     public static void main(String[] args) {
 
         BeanMethods beanMethods = new BeanMethods();
 
+        JdkRegexpMethodPointcut jdkRegexpMethodPointcut = new JdkRegexpMethodPointcut();
         BeanMethodNamePointCut beanMethodNamePointCut = new BeanMethodNamePointCut();
         ProxyFactory proxyFactory = new ProxyFactory();
 
-        Advisor advisor = new DefaultPointcutAdvisor(beanMethodNamePointCut, beanMethodNamePointCut);
+        Advisor advisor = new DefaultPointcutAdvisor(jdkRegexpMethodPointcut, beanMethodNamePointCut);
 
-        beanMethodNamePointCut.addMethodName("run");
-        beanMethodNamePointCut.addMethodName("jump");
+        jdkRegexpMethodPointcut.setPattern(".*run*.");
 
         proxyFactory.setTarget(beanMethods);
         proxyFactory.addAdvisor(advisor);
