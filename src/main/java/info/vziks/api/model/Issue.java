@@ -90,7 +90,7 @@ public class Issue implements Cloneable {
                 '}';
     }
 
-    private void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -108,4 +108,7 @@ public class Issue implements Cloneable {
     public void setType(int type) {
         this.type = type;
     }
+
+
+
 }

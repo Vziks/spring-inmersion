@@ -52,7 +52,6 @@
             <artifactId>bootstrap</artifactId>
             <version>4.4.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -98,14 +97,11 @@
             <artifactId>webjars-locator</artifactId>
             <version>0.38</version>
         </dependency>
-
         <dependency>
             <groupId>aopalliance</groupId>
             <artifactId>aopalliance</artifactId>
             <version>1.0</version>
         </dependency>
-
-
     </dependencies>
     <build>
         <plugins>
