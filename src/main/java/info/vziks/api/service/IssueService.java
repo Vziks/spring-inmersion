@@ -3,8 +3,11 @@ package info.vziks.api.service;
 import info.vziks.api.model.Issue;
 import info.vziks.api.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +22,8 @@ import java.util.Optional;
 @Service
 public class IssueService {
 
+    @PersistenceContext
+    private EntityManager entityManager;
     private final IssueRepository issueRepository;
 
     @Autowired
@@ -66,4 +71,21 @@ public class IssueService {
 //        return issues;
 
     }
+
+    public void reverseBool() {
+//        Query q=session.createQuery("update User set name=:n where id=:i");
+//        q.setParameter("n","Udit Kumar");
+//        q.setParameter("i",111);
+//
+//        int status=q.executeUpdate();
+        String fild = "active";
+        entityManager.getTransaction();
+        entityManager
+//                .createQuery("UPDATE Issue SET active = (active = false)")
+                .createQuery("update Issue i set i.active = -1 *(Abs(i.active))")
+//                .SQL("update Issue i set i.active = NOT i.active")
+//                .setParameterList("n",false)
+                .executeUpdate();
+    }
+
 }

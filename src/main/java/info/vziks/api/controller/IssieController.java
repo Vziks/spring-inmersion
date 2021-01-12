@@ -4,12 +4,17 @@ import info.vziks.api.model.Issue;
 import info.vziks.api.service.IssueService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -28,6 +33,29 @@ public class IssieController {
 
     @RequestMapping(path = "/issues")
     public List<Issue> allIssues() {
+        Connection.Response response;
+
+        try {
+            response = Jsoup.connect("http://www.example.com/login")
+                    .data("username", "myUsername",
+                            "password", "myPassword")
+                    .method(Connection.Method.POST)
+                    .execute();
+
+            Map<String, String> loginCookies = response.cookies();
+
+            Connection.Response newRes = Jsoup.connect("url")
+                    .cookies(loginCookies)
+                    .method(Connection.Method.GET)
+                    .execute();
+
+
+            System.out.println(newRes.statusCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         logger.info("Request /issues");
         return issueService.getAllIssues();
     }
@@ -61,6 +89,13 @@ public class IssieController {
     @ResponseStatus(HttpStatus.OK)
     public long countIssue() {
         return issueService.countIssues();
+    }
+
+
+    @RequestMapping(value = "/issues/reverse", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public void reverseIssue() {
+        issueService.reverseBool();
     }
 
     @RequestMapping(value = "/issues", method = RequestMethod.PUT)

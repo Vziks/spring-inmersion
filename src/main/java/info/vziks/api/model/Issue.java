@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -19,17 +20,22 @@ import java.util.Date;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Issue implements Cloneable {
+public class Issue implements Cloneable, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String issue;
     private String description;
+    private boolean active;
 
     @CreatedDate
     Date createdAt;
 
+
+    private Date date;
+
+    public
     @LastModifiedDate
     Date modifiedAt;
 
@@ -110,5 +116,11 @@ public class Issue implements Cloneable {
     }
 
 
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

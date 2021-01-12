@@ -30,42 +30,36 @@ public class IssueDaoImplementation implements IssueDao {
 
 
     private Connection getConnection() throws SQLException {
+
         return DriverManager.getConnection(
                 "jdbc:postgresql://localhost:5432/skeleton",
                 "vziks", "");
     }
 
-    private void closeConnection(Connection connection) {
-        if (connection == null) {
-            return;
-        }
-        try {
-            connection.close();
-        } catch (SQLException ex) {
-            logger.error("Problem closing connection to the database!", ex);
-        }
-    }
-
     @Override
     public List<Issue> findAll() {
         List<Issue> result = new ArrayList<>();
-        try (Connection connection = getConnection()) {
-            Statement statement =
-                    connection.createStatement();
+        try (Connection connection = getConnection();
+             Statement statement =
+                     connection.createStatement()) {
+            ;
             ResultSet resultSet = statement.executeQuery("select * from issue");
-            while (resultSet.next()) {
-                Issue issue = new Issue();
-                issue.setId(resultSet.getLong("id"));
-                issue.setIssue(resultSet.getString("issue"));
-                issue.setDescription(resultSet.getString("description"));
-                issue.setType(resultSet.getInt("type"));
-                result.add(issue);
-            }
-            statement.close();
+            IterateAndFillList(result, resultSet);
         } catch (SQLException ex) {
             logger.error("Problem when executing SELECT!", ex);
         }
         return result;
+    }
+
+    private void IterateAndFillList(List<Issue> result, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Issue issue = new Issue();
+            issue.setId(resultSet.getLong("id"));
+            issue.setIssue(resultSet.getString("issue"));
+            issue.setDescription(resultSet.getString("description"));
+            issue.setType(resultSet.getInt("type"));
+            result.add(issue);
+        }
     }
 
 
@@ -98,20 +92,13 @@ public class IssueDaoImplementation implements IssueDao {
             preparedStatement.setString(1, issue);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                Issue issueTmp = new Issue();
-                issueTmp.setId(resultSet.getLong("id"));
-                issueTmp.setIssue(resultSet.getString("issue"));
-                issueTmp.setDescription(resultSet.getString("description"));
-                issueTmp.setType(resultSet.getInt("type"));
-                result.add(issueTmp);
-            }
+            IterateAndFillList(result, resultSet);
 
         } catch (SQLException ex) {
             logger.error("Problem executing select", ex);
         }
 
-        return  result;
+        return result;
 
     }
 
@@ -119,24 +106,15 @@ public class IssueDaoImplementation implements IssueDao {
     public String findIssueById(Long id) {
         String str = null;
         try (Connection connection = getConnection()) {
-
             PreparedStatement preparedStatement = connection.prepareStatement("select * from issue where id=?");
             preparedStatement.setLong(1, id);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-
-
-
-
-             str = resultSet.getString("issue");
-
-
-
+            str = resultSet.getString("issue");
         } catch (SQLException ex) {
             logger.error("Problem executing select", ex);
         }
 
-        return  str;
+        return str;
     }
 
 
@@ -156,10 +134,6 @@ public class IssueDaoImplementation implements IssueDao {
         }
     }
 
-    @Override
-    public List<Issue> findAllWithAlbums() {
-        return null;
-    }
 
     @Override
     public void insertWithAssign(Issue issue) {

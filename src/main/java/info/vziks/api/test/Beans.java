@@ -6,6 +6,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Class Beans
  * Project spring-api
@@ -28,6 +30,7 @@ public class Beans {
         System.out.println(applicationContext.getBean("child"));
 
 
+
         System.out.println(applicationContext1.getBean("parent"));
         System.out.println(applicationContext1.getBean("child"));
 
@@ -41,6 +44,10 @@ public class Beans {
         namedSinger.sing();
 
         applicationContext.registerShutdownHook();
+
+
+        String asasd = new String("222222");
+
 
     }
 }

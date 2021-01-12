@@ -17,7 +17,6 @@ public interface IssueDao {
     void insert(Issue issue);
     void update(Issue issue);
     void delete(Long id);
-    List<Issue> findAllWithAlbums();
     void insertWithAssign(Issue issue);
 
 

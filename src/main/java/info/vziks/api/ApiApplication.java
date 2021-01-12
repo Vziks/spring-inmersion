@@ -5,12 +5,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
+
+import java.io.*;
 
 @SpringBootApplication
 @EnableScheduling
@@ -32,9 +35,10 @@ public class ApiApplication {
                 .build();
     }
 
-    private ServerResponse createRoute(ServerRequest serverRequest) {
+    private ServerResponse createRoute(ServerRequest serverRequest) throws IOException {
 
         return ServerResponse.ok().render("create");
     }
 
 }
+

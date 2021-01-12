@@ -7,16 +7,27 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 
 /**
@@ -48,11 +59,16 @@ public class WebContentController {
     @Value("${fileProperty.number}")
     private int fileValue;
 
+    @Autowired
+    Environment environment;
+
     private final Logger logger = LoggerFactory.getLogger(WebContentController.class);
 
     @GetMapping("/content")
-    public String content(@RequestParam(name = "content", required = false, defaultValue = "Content") String content, Model model) {
+    public String content(@RequestParam(name = "content", required = false, defaultValue = "Content") String content, Model model) throws UnknownHostException {
 
+        InetAddress myHost = InetAddress.getLocalHost();
+        System.out.println(myHost.getHostName());
 
         Locale russian = new Locale("ru", "RU");
 
@@ -91,6 +107,20 @@ public class WebContentController {
         getInfo(resource1);
         Resource resource2 = applicationContext.getResource("https://www.google.ru");
         getInfo(resource2);
+        return "content";
+    }
+
+
+    @GetMapping("/content/two")
+    public String two(HttpServletRequest request) {
+
+
+
+        List<Integer> list = new ArrayList<>();
+
+        list.add(5);
+
+        System.out.println(request.getParameterMap());
         return "content";
     }
 
