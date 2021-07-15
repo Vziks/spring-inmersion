@@ -65,6 +65,12 @@ public class IssieController {
         return issueService.getByAssigneeId(id);
     }
 
+    @RequestMapping(path = "/issues/assignee/show", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Long> getIds() {
+        return issueService.getIds();
+    }
+
     @RequestMapping("/issues/{id}")
     public Issue getIssue(@PathVariable Long id) {
         Issue issue = issueService.getIssueById(id);

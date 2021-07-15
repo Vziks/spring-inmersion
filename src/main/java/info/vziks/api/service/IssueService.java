@@ -72,6 +72,15 @@ public class IssueService {
 
     }
 
+
+
+    public List<Long> getIds() {
+//        List<Issue> issues = new ArrayList<>();
+        return issueRepository.findIds();
+//        return issues;
+
+    }
+
     public void reverseBool() {
 //        Query q=session.createQuery("update User set name=:n where id=:i");
 //        q.setParameter("n","Udit Kumar");

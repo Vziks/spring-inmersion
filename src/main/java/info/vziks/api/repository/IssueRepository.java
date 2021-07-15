@@ -21,4 +21,10 @@ public interface IssueRepository extends CrudRepository<Issue, Long> {
             nativeQuery = true)
     long getIssueCount();
 
+
+    @Query(
+            value = "SELECT * FROM Issue i",
+            nativeQuery = true)
+    List<Long> findIds();
+
 }
